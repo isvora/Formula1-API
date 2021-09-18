@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -59,20 +58,10 @@ public class DriverController {
 
     @GetMapping("/api/drivers/bydob/")
     public CollectionModel<EntityModel<Driver>> getDriversByAge(@RequestParam(value="sort") DobOrderEnum dobOrderEnum) {
-        List<EntityModel<Driver>> driverEntityModels;
-
-        // If ageOrderType is OTY (Oldest to Youngest) we sort the list by Date of Birth. Otherwise we reverse the list.
-        if (dobOrderEnum == DobOrderEnum.OTY) {
-            driverEntityModels = driverRepository.findAll().stream()
-                    .sorted(Comparator.comparing(Driver::getDob))
-                    .map(driverModelAssembler::toModel)
-                    .collect(Collectors.toList());
-        } else {
-            driverEntityModels = driverRepository.findAll().stream()
-                    .sorted(Comparator.comparing(Driver::getDob).reversed())
-                    .map(driverModelAssembler::toModel)
-                    .collect(Collectors.toList());
-        }
+        List<Driver> drivers = driverRepository.findAllDriversByDob(dobOrderEnum);
+        List<EntityModel<Driver>> driverEntityModels = drivers.stream()
+                .map(driverModelAssembler::toModel)
+                .collect(Collectors.toList());
 
         return CollectionModel.of(
                 driverEntityModels,
@@ -81,11 +70,11 @@ public class DriverController {
     }
 
     @GetMapping("api/drivers/nationality/{nationality}")
-    public CollectionModel<EntityModel<Driver>> getDriversByWins(@PathVariable String nationality) {
-        List<EntityModel<Driver>> driverEntityModels = driverRepository.findAll().stream()
-                    .filter(driver -> Objects.equals(driver.getNationality(), nationality))
-                    .map(driverModelAssembler::toModel)
-                    .collect(Collectors.toList());
+    public CollectionModel<EntityModel<Driver>> getDriversByNationality(@PathVariable String nationality) {
+        List<Driver> drivers = driverRepository.findAllDriversByNationality(nationality);
+        List<EntityModel<Driver>> driverEntityModels = drivers.stream()
+                .map(driverModelAssembler::toModel)
+                .collect(Collectors.toList());
 
         if (driverEntityModels.isEmpty()) {
             throw new DriverNotFoundException("Driver not found for nationality " + nationality);
