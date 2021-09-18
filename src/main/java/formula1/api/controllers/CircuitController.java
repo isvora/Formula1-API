@@ -51,7 +51,7 @@ public class CircuitController {
 
     @GetMapping("/api/circuits/")
     public EntityModel<Circuit> getCircuitByRef(@RequestParam(value="ref") String ref) {
-        Circuit circuit = circuitRepository.findByRef(ref);
+        Circuit circuit = circuitRepository.findCircuitByRef(ref);
         return circuitModelAssembler.toModel(circuit);
     }
 

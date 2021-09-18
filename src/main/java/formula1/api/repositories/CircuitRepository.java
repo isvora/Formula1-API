@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @Repository
 public interface CircuitRepository extends JpaRepository<Circuit, Long>  {
 
-    default Circuit findByRef(String ref) {
+    default Circuit findCircuitByRef(String ref) {
         Optional<Circuit> circuit = this.findAll()
                 .stream()
                 .filter(circuit1 -> circuit1.getCircuitRef().equals(ref))

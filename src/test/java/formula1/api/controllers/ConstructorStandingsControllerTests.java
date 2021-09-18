@@ -1,10 +1,7 @@
 package formula1.api.controllers;
 
-import formula1.api.assembler.ConstructorResultsModelAssembler;
 import formula1.api.assembler.ConstructorStandingsModelAssembler;
-import formula1.api.entities.ConstructorResults;
 import formula1.api.entities.ConstructorStandings;
-import formula1.api.repositories.ConstructorResultsRepository;
 import formula1.api.repositories.ConstructorStandingsRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;

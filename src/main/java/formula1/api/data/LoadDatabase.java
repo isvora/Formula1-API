@@ -2,14 +2,8 @@ package formula1.api.data;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import formula1.api.entities.Circuit;
-import formula1.api.entities.Constructor;
-import formula1.api.entities.ConstructorResults;
-import formula1.api.entities.ConstructorStandings;
-import formula1.api.repositories.CircuitRepository;
-import formula1.api.repositories.ConstructorRepository;
-import formula1.api.repositories.ConstructorResultsRepository;
-import formula1.api.repositories.ConstructorStandingsRepository;
+import formula1.api.entities.*;
+import formula1.api.repositories.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -33,18 +27,20 @@ public class LoadDatabase {
     CommandLineRunner initDatabase(CircuitRepository circuitRepository,
                                    ConstructorRepository constructorRepository,
                                    ConstructorResultsRepository constructorResultsRepository,
-                                   ConstructorStandingsRepository constructorStandingsRepository) {
+                                   ConstructorStandingsRepository constructorStandingsRepository,
+                                   DriverRepository driverRepository) {
         return args -> {
             log.info("Loading database...");
             loadCircuitData(circuitRepository);
             loadConstructorData(constructorRepository);
             loadConstructorResults(constructorResultsRepository);
             loadConstructorStandings(constructorStandingsRepository);
+            loadDriverData(driverRepository);
         };
     }
 
     private void loadCircuitData(CircuitRepository circuitRepository) {
-        String json = parseFile("./resources/circuits.json");
+        String json = parseFile("./resources/json/circuits.json");
         Type circuit = new TypeToken<ArrayList<Circuit>>(){}.getType();
 
         ArrayList<Circuit> circuits = gson.fromJson(json, circuit);
@@ -55,7 +51,7 @@ public class LoadDatabase {
     }
 
     private void loadConstructorData(ConstructorRepository constructorRepository) {
-        String json = parseFile("./resources/constructors.json");
+        String json = parseFile("./resources/json/constructors.json");
         Type constructor = new TypeToken<ArrayList<Constructor>>(){}.getType();
 
         ArrayList<Constructor> circuits = gson.fromJson(json, constructor);
@@ -66,7 +62,7 @@ public class LoadDatabase {
     }
 
     private void loadConstructorResults(ConstructorResultsRepository constructorResultsRepository) {
-        String json = parseFile("./resources/constructor_results.json");
+        String json = parseFile("./resources/json/constructor_results.json");
         Type constructorResults = new TypeToken<ArrayList<ConstructorResults>>(){}.getType();
 
         ArrayList<ConstructorResults> constructorResultsList = gson.fromJson(json, constructorResults);
@@ -77,13 +73,24 @@ public class LoadDatabase {
     }
 
     private void loadConstructorStandings(ConstructorStandingsRepository constructorStandingsRepository) {
-        String json = parseFile("./resources/constructor_standings.json");
+        String json = parseFile("./resources/json/constructor_standings.json");
         Type constructorStandings = new TypeToken<ArrayList<ConstructorStandings>>(){}.getType();
 
         ArrayList<ConstructorStandings> constructorStandingsList = gson.fromJson(json, constructorStandings);
 
         if (constructorStandingsList != null) {
             constructorStandingsRepository.saveAll(constructorStandingsList);
+        }
+    }
+
+    private void loadDriverData(DriverRepository driverRepository) {
+        String json = parseFile("./resources/json/drivers.json");
+        Type driver = new TypeToken<ArrayList<Driver>>(){}.getType();
+
+        ArrayList<Driver> drivers = gson.fromJson(json, driver);
+
+        if (drivers != null) {
+            driverRepository.saveAll(drivers);
         }
     }
 
