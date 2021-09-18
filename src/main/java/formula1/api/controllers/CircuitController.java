@@ -2,8 +2,7 @@ package formula1.api.controllers;
 
 import formula1.api.assembler.CircuitModelAssembler;
 import formula1.api.entities.Circuit;
-import formula1.api.exceptions.circuit.CircuitNotFoundException;
-import formula1.api.exceptions.circuit.CircuitNotFoundForNationalityException;
+import formula1.api.exceptions.CircuitNotFoundException;
 import formula1.api.repositories.CircuitRepository;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -44,7 +43,7 @@ public class CircuitController {
     @GetMapping("/api/circuits/{id}")
     public EntityModel<Circuit> getCircuitById(@PathVariable Long id) {
         Circuit circuit = circuitRepository.findById(id)
-                .orElseThrow(() -> new CircuitNotFoundException(id));
+                .orElseThrow(() -> new CircuitNotFoundException("Circuit not found for id " + id));
 
         return circuitModelAssembler.toModel(circuit);
     }
@@ -63,7 +62,7 @@ public class CircuitController {
                 .collect(Collectors.toList());
 
         if (circuitEntityModels.isEmpty()) {
-            throw new CircuitNotFoundForNationalityException(country);
+            throw new CircuitNotFoundException("Circuit not found for country " + country);
         }
 
         return CollectionModel.of(

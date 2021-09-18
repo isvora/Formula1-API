@@ -2,8 +2,7 @@ package formula1.api.controllers;
 
 import formula1.api.assembler.DriverModelAssembler;
 import formula1.api.entities.Driver;
-import formula1.api.exceptions.driver.DriverNotFoundByNationalityException;
-import formula1.api.exceptions.driver.DriverNotFoundException;
+import formula1.api.exceptions.DriverNotFoundException;
 import formula1.api.repositories.DriverRepository;
 import formula1.api.types.DobOrderEnum;
 import org.springframework.hateoas.CollectionModel;
@@ -47,7 +46,7 @@ public class DriverController {
     @GetMapping("/api/drivers/{id}")
     public EntityModel<Driver> getDriverById(@PathVariable Long id) {
         Driver driver = driverRepository.findById(id)
-                .orElseThrow(() -> new DriverNotFoundException(id));
+                .orElseThrow(() -> new DriverNotFoundException("Driver not found for id " + id));
 
         return driverModelAssembler.toModel(driver);
     }
@@ -89,7 +88,7 @@ public class DriverController {
                     .collect(Collectors.toList());
 
         if (driverEntityModels.isEmpty()) {
-            throw new DriverNotFoundByNationalityException(nationality);
+            throw new DriverNotFoundException("Driver not found for nationality " + nationality);
         }
 
         return CollectionModel.of(

@@ -2,8 +2,7 @@ package formula1.api.controllers;
 
 import formula1.api.assembler.ConstructorModelAssembler;
 import formula1.api.entities.Constructor;
-import formula1.api.exceptions.circuit.CircuitNotFoundException;
-import formula1.api.exceptions.circuit.CircuitNotFoundForNationalityException;
+import formula1.api.exceptions.ConstructorNotFoundException;
 import formula1.api.repositories.ConstructorRepository;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -44,7 +43,7 @@ public class ConstructorController {
     @GetMapping("/api/constructors/{id}")
     public EntityModel<Constructor> getConstructorById(@PathVariable Long id) {
         Constructor constructor = constructorRepository.findById(id)
-                .orElseThrow(() -> new CircuitNotFoundException(id));
+                .orElseThrow(() -> new ConstructorNotFoundException("Constructor not found for id " + id));
 
         return constructorModelAssembler.toModel(constructor);
     }
@@ -63,7 +62,7 @@ public class ConstructorController {
                 .collect(Collectors.toList());
 
         if (constructorEntityModels.isEmpty()) {
-            throw new CircuitNotFoundForNationalityException(nationality);
+            throw new ConstructorNotFoundException("Constructor not found for nationality " + nationality);
         }
 
         return CollectionModel.of(

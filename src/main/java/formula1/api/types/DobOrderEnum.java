@@ -2,7 +2,7 @@ package formula1.api.types;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import formula1.api.exceptions.misc.UnknownEnumValueException;
+import formula1.api.exceptions.UnknownEnumValueException;
 
 import java.util.Arrays;
 

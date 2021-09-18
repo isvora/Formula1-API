@@ -1,7 +1,7 @@
 package formula1.api.repositories;
 
 import formula1.api.entities.Circuit;
-import formula1.api.exceptions.circuit.CircuitNotFoundException;
+import formula1.api.exceptions.CircuitNotFoundException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -21,7 +21,7 @@ public interface CircuitRepository extends JpaRepository<Circuit, Long>  {
         if (circuit.isPresent()) {
             return circuit.get();
         } else {
-            throw new CircuitNotFoundException(ref);
+            throw new CircuitNotFoundException("Circuit not found for ref " + ref);
         }
     }
 

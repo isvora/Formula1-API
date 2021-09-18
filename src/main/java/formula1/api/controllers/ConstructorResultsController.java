@@ -2,8 +2,7 @@ package formula1.api.controllers;
 
 import formula1.api.assembler.ConstructorResultsModelAssembler;
 import formula1.api.entities.ConstructorResults;
-import formula1.api.exceptions.constructor.results.ConstructorResultsNotFoundByRaceIdException;
-import formula1.api.exceptions.constructor.results.ConstructorResultsNotFoundException;
+import formula1.api.exceptions.ConstructorResultsNotFoundException;
 import formula1.api.repositories.ConstructorResultsRepository;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -43,7 +42,7 @@ public class ConstructorResultsController {
     @GetMapping("/api/constructor-results/{id}")
     public EntityModel<ConstructorResults> getConstructorResultsById(@PathVariable Long id) {
         ConstructorResults constructorResults = constructorResultsRepository.findById(id)
-                .orElseThrow(() -> new ConstructorResultsNotFoundException(id));
+                .orElseThrow(() -> new ConstructorResultsNotFoundException("Constructor results not found for id " + id));
 
         return constructorResultsModelAssembler.toModel(constructorResults);
     }
@@ -56,7 +55,7 @@ public class ConstructorResultsController {
                 .collect(Collectors.toList());
 
         if (constructorResultsEntityModels.isEmpty()) {
-            throw new ConstructorResultsNotFoundByRaceIdException(raceId);
+            throw new ConstructorResultsNotFoundException("Constructor results not found for raceId " + raceId);
         }
 
         return CollectionModel.of(
@@ -73,7 +72,7 @@ public class ConstructorResultsController {
                 .collect(Collectors.toList());
 
         if (constructorResultsEntityModels.isEmpty()) {
-            throw new ConstructorResultsNotFoundByRaceIdException(constructorId);
+            throw new ConstructorResultsNotFoundException("Constructor results not found for constructorId " + constructorId);
         }
 
         return CollectionModel.of(

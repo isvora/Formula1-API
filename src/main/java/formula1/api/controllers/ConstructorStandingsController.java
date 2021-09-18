@@ -2,9 +2,7 @@ package formula1.api.controllers;
 
 import formula1.api.assembler.ConstructorStandingsModelAssembler;
 import formula1.api.entities.ConstructorStandings;
-import formula1.api.exceptions.constructor.standings.ConstructorStandingsNotFoundException;
-import formula1.api.exceptions.constructor.standings.ConstructorStandingsNotFoundForConstructorException;
-import formula1.api.exceptions.constructor.standings.ConstructorStandingsNotFoundForRaceException;
+import formula1.api.exceptions.ConstructorStandingsNotFoundException;
 import formula1.api.repositories.ConstructorStandingsRepository;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -44,7 +42,7 @@ public class ConstructorStandingsController {
     @GetMapping("/api/constructor-standings/{id}")
     public EntityModel<ConstructorStandings> getConstructorStandingsById(@PathVariable Long id) {
         ConstructorStandings constructorStandings = constructorStandingsRepository.findById(id)
-                .orElseThrow(() -> new ConstructorStandingsNotFoundException(id));
+                .orElseThrow(() -> new ConstructorStandingsNotFoundException("Cnstructor standings not found for id " + id));
 
         return constructorStandingsModelAssembler.toModel(constructorStandings);
     }
@@ -57,7 +55,7 @@ public class ConstructorStandingsController {
                 .collect(Collectors.toList());
 
         if (constructorStandingsEntityModelList.isEmpty()) {
-            throw new ConstructorStandingsNotFoundForConstructorException(constructorId);
+            throw new ConstructorStandingsNotFoundException("Cnstructor standings not found for constructorId " + constructorId);
         }
 
         return CollectionModel.of(
@@ -74,7 +72,7 @@ public class ConstructorStandingsController {
                 .collect(Collectors.toList());
 
         if (constructorStandingsEntityModelList.isEmpty()) {
-            throw new ConstructorStandingsNotFoundForRaceException(raceId);
+            throw new ConstructorStandingsNotFoundException("Cnstructor standings not found for raceId " + raceId);
         }
 
         return CollectionModel.of(

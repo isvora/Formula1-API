@@ -1,7 +1,7 @@
 package formula1.api.repositories;
 
 import formula1.api.entities.Constructor;
-import formula1.api.exceptions.circuit.CircuitNotFoundException;
+import formula1.api.exceptions.ConstructorNotFoundException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -21,7 +21,7 @@ public interface ConstructorRepository extends JpaRepository<Constructor, Long> 
         if (constructor.isPresent()) {
             return constructor.get();
         } else {
-            throw new CircuitNotFoundException(ref);
+            throw new ConstructorNotFoundException("Constructor not found for ref " + ref);
         }
     }
 

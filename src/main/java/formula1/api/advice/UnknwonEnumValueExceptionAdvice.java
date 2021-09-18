@@ -1,6 +1,6 @@
 package formula1.api.advice;
 
-import formula1.api.exceptions.misc.UnknownEnumValueException;
+import formula1.api.exceptions.UnknownEnumValueException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

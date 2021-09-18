@@ -1,10 +1,7 @@
 package formula1.api.repositories;
 
-import formula1.api.entities.Circuit;
 import formula1.api.entities.Driver;
-import formula1.api.exceptions.circuit.CircuitNotFoundException;
-import formula1.api.exceptions.driver.DriverNotFoundByCodeException;
-import formula1.api.exceptions.driver.DriverNotFoundException;
+import formula1.api.exceptions.DriverNotFoundException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -23,7 +20,7 @@ public interface DriverRepository extends JpaRepository<Driver, Long> {
         if (driver.isPresent()) {
             return driver.get();
         } else {
-            throw new DriverNotFoundException(ref);
+            throw new DriverNotFoundException("Driver not found for ref " + ref);
         }
     }
 
@@ -36,7 +33,7 @@ public interface DriverRepository extends JpaRepository<Driver, Long> {
         if (driver.isPresent()) {
             return driver.get();
         } else {
-            throw new DriverNotFoundByCodeException(code);
+            throw new DriverNotFoundException("Driver not found for code " + code);
         }
     }
 }
