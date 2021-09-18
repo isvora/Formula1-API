@@ -12,13 +12,13 @@ import java.util.stream.Collectors;
 @Repository
 public interface ConstructorStandingsRepository extends JpaRepository<ConstructorStandings, Long> {
 
-    default List<ConstructorStandings> findConstructorsForConstructor(Long constructorId) {
+    default List<ConstructorStandings> findConstructorStandingsForConstructor(Long constructorId) {
         return this.findAll().stream()
                 .filter(constructorStandings -> Objects.equals(constructorStandings.getConstructorId(), constructorId))
                 .collect(Collectors.toList());
     }
 
-    default List<ConstructorStandings> findConstructorsForRace(Long raceId) {
+    default List<ConstructorStandings> findConstructorStandingsForRace(Long raceId) {
         return this.findAll().stream()
                 .filter(constructorStandings -> Objects.equals(constructorStandings.getRaceId(), raceId))
                 .collect(Collectors.toList());

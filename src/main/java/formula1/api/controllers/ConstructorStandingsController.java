@@ -51,7 +51,7 @@ public class ConstructorStandingsController {
 
     @GetMapping("/api/constructor-standings/constructor/{constructorId}")
     public CollectionModel<EntityModel<ConstructorStandings>> getConstructorStandingsForConstructor(@PathVariable Long constructorId) {
-        List<EntityModel<ConstructorStandings>> constructorStandingsEntityModelList = constructorStandingsRepository.findConstructorsForConstructor(constructorId)
+        List<EntityModel<ConstructorStandings>> constructorStandingsEntityModelList = constructorStandingsRepository.findConstructorStandingsForConstructor(constructorId)
                 .stream()
                 .map(constructorStandingsModelAssembler::toModel)
                 .collect(Collectors.toList());
@@ -68,7 +68,7 @@ public class ConstructorStandingsController {
 
     @GetMapping("/api/constructor-standings/race/{raceId}")
     public CollectionModel<EntityModel<ConstructorStandings>> getConstructorStandingsForRace(@PathVariable Long raceId) {
-        List<EntityModel<ConstructorStandings>> constructorStandingsEntityModelList = constructorStandingsRepository.findConstructorsForRace(raceId)
+        List<EntityModel<ConstructorStandings>> constructorStandingsEntityModelList = constructorStandingsRepository.findConstructorStandingsForRace(raceId)
                 .stream()
                 .map(constructorStandingsModelAssembler::toModel)
                 .collect(Collectors.toList());
