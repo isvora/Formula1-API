@@ -1,9 +1,8 @@
-/*
 package formula1.api.controllers;
 
-import formula1.api.assembler.DriverModelAssembler;
-import formula1.api.entities.Driver;
-import formula1.api.repositories.DriverRepository;
+import formula1.api.assembler.DriverStandingsModelAssembler;
+import formula1.api.entities.DriverStandings;
+import formula1.api.repositories.DriverStandingsRepository;
 import formula1.api.types.DobOrderEnum;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,9 +15,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.Calendar;
 import java.util.Collections;
-import java.util.Date;
 
 import static org.hamcrest.CoreMatchers.is;
 
@@ -29,77 +26,80 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(DriverController.class)
-@Import({ DriverModelAssembler.class })
+@WebMvcTest(DriverStandingsController.class)
+@Import({ DriverStandingsModelAssembler.class })
 public class DriverStandingsControllerTests {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private DriverRepository driverRepository;
+    private DriverStandingsRepository driverStandingsRepository;
 
-    private final
+    private final DriverStandings driverStandings = new DriverStandings(
+            33007L,
+            1030L,
+            1L,
+            413.0,
+            1,
+            "1",
+            11);
 
     @Test
-    public void testGetAllDrivers() throws Exception {
-        given(driverRepository.findAll()).willReturn(
-                Collections.singletonList(driver));
+    public void testGetAllDriverStandings() throws Exception {
+        given(driverStandingsRepository.findAll())
+                .willReturn(Collections.singletonList(driverStandings));
 
-        assertListRequestIsValid("/api/drivers");
+        assertListRequestIsValid("/api/driverstandings");
     }
 
     @Test
-    public void testGetDriverById() throws Exception {
-        given(driverRepository.findById(24407L)).willReturn(java.util.Optional.of(driver));
+    public void testGetDriverStandingsById() throws Exception {
+        given(driverStandingsRepository.findById(33007L))
+                .willReturn(java.util.Optional.of(driverStandings));
 
-        assertRequestIsValid("/api/drivers/24407");
+        assertRequestIsValid("/api/driverstandings/33007");
     }
 
     @Test
-    public void testGetDriverByIdThrowsException() throws Exception {
-        given(driverRepository.findById(24407L)).willReturn(java.util.Optional.of(driver));
+    public void testGetDriverStandingsByIdThrowsException() throws Exception {
+        given(driverStandingsRepository.findById(33007L))
+                .willReturn(java.util.Optional.of(driverStandings));
 
-        assertRequestThrowsExeption("/api/drivers/1234", "Driver not found for id 1234");
+        assertRequestThrowsExeption("/api/driverstandings/12345", "Driver standings not found for driverStandingsId 12345");
+    }
+
+
+    @Test
+    public void testGetDriverStandingsByRace() throws Exception {
+        given(driverStandingsRepository.findDriverStandingsByRace(1030L))
+                .willReturn(Collections.singletonList(driverStandings));
+
+        assertListRequestIsValid("/api/driverstandings/race/1030");
     }
 
     @Test
-    public void testGetDriverByRef() throws Exception {
-        given(driverRepository.findDriverByRef("hamilton")).willReturn(driver);
+    public void testGetDriverStandingsByRaceThrowsException() throws Exception {
+        given(driverStandingsRepository.findDriverStandingsByRace(1030L))
+                .willReturn(Collections.singletonList(driverStandings));
 
-        assertRequestIsValid("/api/drivers/?ref=hamilton");
+        assertRequestThrowsExeption("/api/driverstandings/race/12345", "Driver standings not found for raceId 12345");
     }
 
     @Test
-    public void testGetDriversSortByDob() throws Exception {
-        given(driverRepository.findAllDriversByDob(DobOrderEnum.YTO)).willReturn(
-                Collections.singletonList(driver));
+    public void testGetDriverStandingsByDriver() throws Exception {
+        given(driverStandingsRepository.findDriverStandingsByDriver(1L))
+                .willReturn(Collections.singletonList(driverStandings));
 
-        assertListRequestIsValid("/api/drivers/bydob/?sort=YTO");
+        assertListRequestIsValid("/api/driverstandings/driver/1");
     }
 
     @Test
-    public void testGetDriversSortByDobThrowsException() throws Exception {
-        given(driverRepository.findAllDriversByDob(DobOrderEnum.YTO)).willReturn(
-                Collections.singletonList(driver));
+    public void testGetDriverStandingsByDriverThrowsException() throws Exception {
+        given(driverStandingsRepository.findDriverStandingsByDriver(1L))
+                .willReturn(Collections.singletonList(driverStandings));
 
-        assertRequestThrowsExeption("/api/drivers/bydob/?sort=YOT", "Unknown value: YOT\nSupported values: [YTO, OTY]");
-    }
-
-    @Test
-    public void testGetDriversByNationality() throws Exception {
-        given(driverRepository.findAllDriversByNationality("British")).willReturn(
-                Collections.singletonList(driver));
-
-        assertListRequestIsValid("/api/drivers/nationality/British");
-    }
-
-    @Test
-    public void testGetDriversByNationalityThrowsException() throws Exception {
-        given(driverRepository.findAllDriversByNationality("British")).willReturn(
-                Collections.singletonList(driver));
-
-        assertRequestThrowsExeption("/api/drivers/nationality/Romanian", "Driver not found for nationality Romanian");
+        assertRequestThrowsExeption("/api/driverstandings/driver/12345", "Driver standings not found for driverId 12345");
     }
 
     private void assertRequestIsValid(String path) throws Exception {
@@ -107,18 +107,15 @@ public class DriverStandingsControllerTests {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(header().string(HttpHeaders.CONTENT_TYPE, MediaTypes.HAL_JSON_VALUE))
-                .andExpect(jsonPath("driverId", is(24407)))
-                .andExpect(jsonPath("driverRef", is("hamilton")))
-                .andExpect(jsonPath("number", is(44)))
-                .andExpect(jsonPath("code", is("HAM")))
-                .andExpect(jsonPath("forename", is("Lewis")))
-                .andExpect(jsonPath("surname", is("Hamilton")))
-                .andExpect(jsonPath("dob", is("1985-01-06")))
-                .andExpect(jsonPath("nationality", is("British")))
-                .andExpect(jsonPath("url", is("http://en.wikipedia.org/wiki/Lewis_Hamilton")))
-                .andExpect(jsonPath("_links.self[0].href", is("http://localhost/api/drivers/24407")))
-                .andExpect(jsonPath("_links.self[1].href", is("http://localhost/api/drivers/?ref=hamilton")))
-                .andExpect(jsonPath("_links.drivers.href", is("http://localhost/api/drivers")))
+                .andExpect(jsonPath("driverStandingsId", is(33007)))
+                .andExpect(jsonPath("raceId", is(1030)))
+                .andExpect(jsonPath("driverId", is(1)))
+                .andExpect(jsonPath("points", is(413.0)))
+                .andExpect(jsonPath("position", is(1)))
+                .andExpect(jsonPath("positionText", is("1")))
+                .andExpect(jsonPath("wins", is(11)))
+                .andExpect(jsonPath("_links.self.href", is("http://localhost/api/driverstandings/33007")))
+                .andExpect(jsonPath("_links.driverstandings.href", is("http://localhost/api/driverstandings")))
                 .andReturn();
     }
 
@@ -127,18 +124,15 @@ public class DriverStandingsControllerTests {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(header().string(HttpHeaders.CONTENT_TYPE, MediaTypes.HAL_JSON_VALUE))
-                .andExpect(jsonPath("$._embedded.driverList[0].driverId", is(24407)))
-                .andExpect(jsonPath("$._embedded.driverList[0].driverRef", is("hamilton")))
-                .andExpect(jsonPath("$._embedded.driverList[0].number", is(44)))
-                .andExpect(jsonPath("$._embedded.driverList[0].code", is("HAM")))
-                .andExpect(jsonPath("$._embedded.driverList[0].forename", is("Lewis")))
-                .andExpect(jsonPath("$._embedded.driverList[0].surname", is("Hamilton")))
-                .andExpect(jsonPath("$._embedded.driverList[0].dob", is("1985-01-06")))
-                .andExpect(jsonPath("$._embedded.driverList[0].nationality", is("British")))
-                .andExpect(jsonPath("$._embedded.driverList[0].url", is("http://en.wikipedia.org/wiki/Lewis_Hamilton")))
-                .andExpect(jsonPath("$._embedded.driverList[0]._links.self[0].href", is("http://localhost/api/drivers/24407")))
-                .andExpect(jsonPath("$._embedded.driverList[0]._links.self[1].href", is("http://localhost/api/drivers/?ref=hamilton")))
-                .andExpect(jsonPath("$._embedded.driverList[0]._links.drivers.href", is("http://localhost/api/drivers")))
+                .andExpect(jsonPath("$._embedded.driverStandingsList[0].driverStandingsId", is(33007)))
+                .andExpect(jsonPath("$._embedded.driverStandingsList[0].raceId", is(1030)))
+                .andExpect(jsonPath("$._embedded.driverStandingsList[0].driverId", is(1)))
+                .andExpect(jsonPath("$._embedded.driverStandingsList[0].points", is(413.0)))
+                .andExpect(jsonPath("$._embedded.driverStandingsList[0].position", is(1)))
+                .andExpect(jsonPath("$._embedded.driverStandingsList[0].positionText", is("1")))
+                .andExpect(jsonPath("$._embedded.driverStandingsList[0].wins", is(11)))
+                .andExpect(jsonPath("$._embedded.driverStandingsList[0]._links.self.href", is("http://localhost/api/driverstandings/33007")))
+                .andExpect(jsonPath("$._embedded.driverStandingsList[0]._links.driverstandings.href", is("http://localhost/api/driverstandings")))
                 .andReturn();
     }
 
@@ -150,4 +144,3 @@ public class DriverStandingsControllerTests {
                 .andReturn();
     }
 }
-*/
