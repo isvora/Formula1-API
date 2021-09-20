@@ -8,9 +8,20 @@
 <p class="has-line-data" data-line-start="2" data-line-end="3"><a href="https://github.com/isvora/Formula1-API"><img src="https://i.imgur.com/VWjw3cL.png" alt=""></a></p>
 <p class="has-line-data" data-line-start="4" data-line-end="6">Welcome to the Formula1-API created in Java with the help of Spring Boot.<br>
     The data is provided for free from Vopani and hosted on the Kaggle website. You can check it out here: <a href="https://www.kaggle.com/rohanrao/formula-1-world-championship-1950-2020">https://www.kaggle.com/rohanrao/formula-1-world-championship-1950-2020</a></p>
-<p class="has-line-data" data-line-start="7" data-line-end="8">Head over to the docs section to get started</p>
-<h1 class="code-line" data-line-start=9 data-line-end=10 ><a id="Docs_9"></a>Docs</h1>
-<p class="has-line-data" data-line-start="11" data-line-end="12">Here you can find all the API calls you can make with example and responses.</p>
+<h1 class="code-line" data-line-start=7 data-line-end=8 ><a id="Menu_7"></a>Menu</h1>
+<h3 class="code-line" data-line-start=9 data-line-end=10 ><a id="1_Circuit_9" href="#1_Circuit_13">1 Circuit</a></h3>
+<h5 class="code-line" data-line-start=10 data-line-end=11><a id="11_apicircuits_10"  href="#11_apicircuits_26">&emsp;1.1 /api/circuits</a></h5>
+<h5 class="code-line" data-line-start=11 data-line-end=12><a id="12_apicircuitsid_11" href="#12_apicircuitsid_66">&emsp;1.2 /api/circuits/{id}</a></h5>
+<h5 class="code-line" data-line-start=12 data-line-end=13><a id="13_apicircuitsrefref_12" href="#13_apicircuitsrefref_103">&emsp;1.3 /api/circuits/?ref={ref}</a></h5>
+<h5 class="code-line" data-line-start=13 data-line-end=14><a id="14_apicircuitscountrycountry_13"  href="#14_apicircuitscountrycountry_140">&emsp;1.4 /api/circuits/country/{country}</a></h5>
+<h3 class="code-line" data-line-start=14 data-line-end=15><a id="2_Constructor_14" href="#2_Constructor_182">2 Constructor</a></h3>
+<h5 class="code-line" data-line-start=15 data-line-end=16 ><a id="21_apiconstructors_15" href="#21_apiconstructos_199">&emsp;2.1 /api/constructors</a></h5>
+<h5 class="code-line" data-line-start=16 data-line-end=17 ><a id="22_apiconstructorsconstructorId_16" href="#22_apiconstructosconstructorId_236">&emsp;2.2 /api/constructors/{constructorId}</a></h5>
+<h5 class="code-line" data-line-start=17 data-line-end=18 ><a id="23_apiconstructorsrefconstructorRef_17" href="#23_apiconstructosrefconstructorRef_269">&emsp;2.3 /api/constructors/?ref={constructorRef}</a></h5>
+<h5 class="code-line" data-line-start=18 data-line-end=19 ><a id="24_apiconstructorsnationalitynationality_18" href="#24_apiconstructorsnationalitynationality_302">&emsp;2.4 /api/constructors/nationality/{nationality}</a></h5>
+<br/>
+<h1 class="code-line" data-line-start=15 data-line-end=16 ><a id="Docs_15"></a>Docs</h1>
+<p class="has-line-data" data-line-start="17" data-line-end="18">Here you can find all the requests with examples</p>
 <h2 class="code-line" data-line-start=13 data-line-end=14 ><a id="1_Circuit_13"></a>1 Circuit</h2>
 <table class="table table-striped table-bordered">
     <thead>
@@ -246,6 +257,214 @@
                     ],
                     &quot;circuits&quot;: {
                         &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/circuits&quot;
+                    }
+                }
+            },
+    ...
+</code></pre>
+
+<h2 class="code-line" data-line-start=182 data-line-end=183 ><a id="2_Constructor_182"></a>2 Constructor</h2>
+<table class="table table-striped table-bordered">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>constructorId</code></td>
+        <td><code>Long</code></td>
+        <td>The unique value to identify the Constructor object.</td>
+    </tr>
+    <tr>
+        <td><code>constructorRef</code></td>
+        <td><code>String</code></td>
+        <td>Reference name of constructor.</td>
+    </tr>
+    <tr>
+        <td><code>name</code></td>
+        <td><code>String</code></td>
+        <td>Actual name of constructor.</td>
+    </tr>
+    <tr>
+        <td><code>nationality</code></td>
+        <td><code>String</code></td>
+        <td>Nationality of the constructor.</td>
+    </tr>
+    <tr>
+        <td><code>url</code></td>
+        <td><code>String</code></td>
+        <td>An URL to the Constructor wikipedia page.</td>
+    </tr>
+    </tbody>
+</table>
+<h3 class="code-line" data-line-start=199 data-line-end=200 ><a id="21_apiconstructos_199"></a>2.1 /api/constructors</h3>
+<table class="table table-striped table-bordered">
+    <thead>
+    <tr>
+        <th>Request Type</th>
+        <th>Api Endpoint</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>GET</td>
+        <td>/api/constructos</td>
+    </tr>
+    </tbody>
+</table>
+<h4 class="code-line" data-line-start=205 data-line-end=206 ><a id="Request_205"></a>Request</h4>
+<p class="has-line-data" data-line-start="206" data-line-end="207"><code>curl --request GET 'https://formula1data-api.herokuapp.com/api/constructors'</code></p>
+<h4 class="code-line" data-line-start=208 data-line-end=209 ><a id="Response_208"></a>Response</h4>
+<pre><code class="has-line-data" data-line-start="210" data-line-end="235">{
+    &quot;_embedded&quot;: {
+        &quot;constructorList&quot;: [
+            {
+                &quot;constructorId&quot;: 930,
+                &quot;constructorRef&quot;: &quot;mclaren&quot;,
+                &quot;name&quot;: &quot;McLaren&quot;,
+                &quot;nationality&quot;: &quot;British&quot;,
+                &quot;url&quot;: &quot;http://en.wikipedia.org/wiki/McLaren&quot;,
+                &quot;_links&quot;: {
+                    &quot;self&quot;: [
+                        {
+                            &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/constructors/930&quot;
+                        },
+                        {
+                            &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/constructors/?ref=mclaren&quot;
+                        }
+                    ],
+                    &quot;constructors&quot;: {
+                        &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/constructors&quot;
+                    }
+                }
+            },
+        ....
+</code></pre>
+<h3 class="code-line" data-line-start=236 data-line-end=237 ><a id="22_apiconstructosconstructorId_236"></a>2.2 /api/constructors/{constructorId}</h3>
+<table class="table table-striped table-bordered">
+    <thead>
+    <tr>
+        <th>Request Type</th>
+        <th>Api Endpoint</th>
+        <th>constructorId</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>GET</td>
+        <td>/api/constructos/{constructorId}</td>
+        <td><code>constructorId</code></td>
+    </tr>
+    </tbody>
+</table>
+<h4 class="code-line" data-line-start=242 data-line-end=243 ><a id="Request_242"></a>Request</h4>
+<p class="has-line-data" data-line-start="243" data-line-end="244"><code>curl --location --request GET 'https://formula1data-api.herokuapp.com/api/constructors/930'</code></p>
+<h4 class="code-line" data-line-start=245 data-line-end=246 ><a id="Response_245"></a>Response</h4>
+<pre><code class="has-line-data" data-line-start="247" data-line-end="268">{
+    &quot;constructorId&quot;: 930,
+    &quot;constructorRef&quot;: &quot;mclaren&quot;,
+    &quot;name&quot;: &quot;McLaren&quot;,
+    &quot;nationality&quot;: &quot;British&quot;,
+    &quot;url&quot;: &quot;http://en.wikipedia.org/wiki/McLaren&quot;,
+    &quot;_links&quot;: {
+        &quot;self&quot;: [
+            {
+                &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/constructors/930&quot;
+            },
+            {
+                &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/constructors/?ref=mclaren&quot;
+            }
+        ],
+        &quot;constructors&quot;: {
+            &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/constructors&quot;
+        }
+    }
+}
+</code></pre>
+<h3 class="code-line" data-line-start=269 data-line-end=270 ><a id="23_apiconstructosrefconstructorRef_269"></a>2.3 /api/constructors/?ref={constructorRef}</h3>
+<table class="table table-striped table-bordered">
+    <thead>
+    <tr>
+        <th>Request Type</th>
+        <th>Api Endpoint</th>
+        <th>constructorRef</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>GET</td>
+        <td>/api/constructors/?ref={constructorRef}</td>
+        <td><code>constructorRef</code></td>
+    </tr>
+    </tbody>
+</table>
+<h4 class="code-line" data-line-start=275 data-line-end=276 ><a id="Request_275"></a>Request</h4>
+<p class="has-line-data" data-line-start="276" data-line-end="277"><code>curl --location --request GET 'https://formula1data-api.herokuapp.com/api/constructors/?ref=mclaren'</code></p>
+<h4 class="code-line" data-line-start=278 data-line-end=279 ><a id="Response_278"></a>Response</h4>
+<pre><code class="has-line-data" data-line-start="280" data-line-end="301">{
+    &quot;constructorId&quot;: 930,
+    &quot;constructorRef&quot;: &quot;mclaren&quot;,
+    &quot;name&quot;: &quot;McLaren&quot;,
+    &quot;nationality&quot;: &quot;British&quot;,
+    &quot;url&quot;: &quot;http://en.wikipedia.org/wiki/McLaren&quot;,
+    &quot;_links&quot;: {
+        &quot;self&quot;: [
+            {
+                &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/constructors/930&quot;
+            },
+            {
+                &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/constructors/?ref=mclaren&quot;
+            }
+        ],
+        &quot;constructors&quot;: {
+            &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/constructors&quot;
+        }
+    }
+}
+</code></pre>
+<h3 class="code-line" data-line-start=302 data-line-end=303 ><a id="24_apiconstructorsnationalitynationality_302"></a>2.4 /api/constructors/nationality/{nationality}</h3>
+<table class="table table-striped table-bordered">
+    <thead>
+    <tr>
+        <th>Request Type</th>
+        <th>Api Endpoint</th>
+        <th>nationality</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>GET</td>
+        <td>/api/constructors/nationality/{nationality}</td>
+        <td><code>nationality</code></td>
+    </tr>
+    </tbody>
+</table>
+<h4 class="code-line" data-line-start=308 data-line-end=309 ><a id="Request_308"></a>Request</h4>
+<p class="has-line-data" data-line-start="309" data-line-end="310"><code>https://formula1data-api.herokuapp.com/api/constructors/nationality/British</code></p>
+<h4 class="code-line" data-line-start=311 data-line-end=312 ><a id="Response_311"></a>Response</h4>
+<pre><code class="has-line-data" data-line-start="313" data-line-end="338">{
+    &quot;_embedded&quot;: {
+        &quot;constructorList&quot;: [
+            {
+                &quot;constructorId&quot;: 930,
+                &quot;constructorRef&quot;: &quot;mclaren&quot;,
+                &quot;name&quot;: &quot;McLaren&quot;,
+                &quot;nationality&quot;: &quot;British&quot;,
+                &quot;url&quot;: &quot;http://en.wikipedia.org/wiki/McLaren&quot;,
+                &quot;_links&quot;: {
+                    &quot;self&quot;: [
+                        {
+                            &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/constructors/930&quot;
+                        },
+                        {
+                            &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/constructors/?ref=mclaren&quot;
+                        }
+                    ],
+                    &quot;constructors&quot;: {
+                        &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/constructors&quot;
                     }
                 }
             },
