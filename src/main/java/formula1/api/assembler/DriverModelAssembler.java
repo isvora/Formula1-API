@@ -11,6 +11,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Component
 public class DriverModelAssembler implements RepresentationModelAssembler<Driver, EntityModel<Driver>> {
+
     @Override
     public EntityModel<Driver> toModel(Driver driver) {
         return EntityModel.of(
