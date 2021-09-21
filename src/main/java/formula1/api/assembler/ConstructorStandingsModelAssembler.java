@@ -15,7 +15,7 @@ public class ConstructorStandingsModelAssembler implements RepresentationModelAs
     public EntityModel<ConstructorStandings> toModel(ConstructorStandings constructorStandings) {
         return EntityModel.of(
                 constructorStandings,
-                linkTo(methodOn(ConstructorStandingsController.class).getConstructorStandingsById(constructorStandings.getConstructorId())).withSelfRel(),
+                linkTo(methodOn(ConstructorStandingsController.class).getConstructorStandingsById(constructorStandings.getId())).withSelfRel(),
                 linkTo(methodOn(ConstructorStandingsController.class).getAllConstructorStandings()).withRel("constructors-standings")
         );
     }

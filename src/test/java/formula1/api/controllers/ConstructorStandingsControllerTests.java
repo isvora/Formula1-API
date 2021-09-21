@@ -53,7 +53,7 @@ public class ConstructorStandingsControllerTests {
                 .andExpect(jsonPath("$._embedded.constructorStandingsList[0].position", is(1)))
                 .andExpect(jsonPath("$._embedded.constructorStandingsList[0].positionText", is("1")))
                 .andExpect(jsonPath("$._embedded.constructorStandingsList[0].wins", is(1)))
-                .andExpect(jsonPath("$._embedded.constructorStandingsList[0]._links.self.href", is("http://localhost/api/constructor-standings/1")))
+                .andExpect(jsonPath("$._embedded.constructorStandingsList[0]._links.self.href", is("http://localhost/api/constructor-standings/11821")))
                 .andExpect(jsonPath("$._embedded.constructorStandingsList[0]._links.constructors-standings.href", is("http://localhost/api/constructor-standings")))
                 .andReturn();
     }
