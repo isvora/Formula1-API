@@ -32,7 +32,13 @@
 <h5 class="code-line" data-line-start=28 data-line-end=29 ><a id="43_apiconstructorstandingsraceraceId_28" href="#43_apiconstructorstandingsraceraceId_594">&emsp;4.3 /api/constructor-standings/race/{raceId}</a></h5>
 <h5 class="code-line" data-line-start=29 data-line-end=30 ><a id="44_apiconstructorstandingsconstructorconstructorId_29" href="#44_apiconstructorstandingsconstructorconstructorId_628">&emsp;4.4 /api/constructor-standings/constructor/{constructorId}</a></h5>
 <h5 class="code-line" data-line-start=30 data-line-end=31 ><a id="45_apiconstructorstandingsmostwins_30" href="#45_apiconstructorstandingsmostwins_662">&emsp;4.5 /api/constructor-standings/most-wins</a></h5>
-<h5 class="code-line" data-line-start=31 data-line-end=32 ><a id="45_apiconstructorstandingsmostpoints_31" href="#45_apiconstructorstandingsmostpoints_692">&emsp;4.5 /api/constructor-standings/most-points</a></h5>
+<h5 class="code-line" data-line-start=31 data-line-end=32 ><a id="45_apiconstructorstandingsmostpoints_31" href="#45_apiconstructorstandingsmostpoints_692">&emsp;4.6 /api/constructor-standings/most-points</a></h5>
+<h3 class="code-line" data-line-start=32 data-line-end=33 ><a id="5_Driver_32" href="#5_Driver_737"> 5 Driver</a></h3>
+<h5 class="code-line" data-line-start=33 data-line-end=34 ><a id="51_apidrivers_33" href="#51_apidrivers_751">&emsp;5.1 /api/drivers</a></h5>
+<h5 class="code-line" data-line-start=34 data-line-end=35 ><a id="52_apidriversid_34" href="#52_apidriversid_792">&emsp;5.2 /api/drivers/{id}</a></h5>
+<h5 class="code-line" data-line-start=35 data-line-end=36 ><a id="53_apidriversrefref_35" href="#53_apidriversrefdriverRef_829">&emsp;5.3 /api/drivers/?ref={ref}</a></h5>
+<h5 class="code-line" data-line-start=36 data-line-end=37 ><a id="54_apidriversbydobsortdobOrder_36" href="#54_apidriversbydobsortdobOrder_866">&emsp;5.4 /api/drivers/bydob/?sort={dobOrder}</a></h5>
+<h5 class="code-line" data-line-start=37 data-line-end=38 ><a id="55_apidriversnationalitynationality_37" href="#55_apidriversnationalitynationality_907">&emsp;5.5 /api/drivers/nationality/{nationality</a></h5>
 <br/>
 <h1 class="code-line" data-line-start=15 data-line-end=16 ><a id="Docs_15"></a>Docs</h1>
 <p class="has-line-data" data-line-start="17" data-line-end="18">Here you can find all the requests with examples</p>
@@ -853,7 +859,6 @@
 <tr>
 <th>Request Type</th>
 <th>Api Endpoint</th>
-<th>raceId</th>
 <th>Description</th>
 </tr>
 </thead>
@@ -861,7 +866,6 @@
 <tr>
 <td>GET</td>
 <td>/api/constructor-standings/race/{raceId}</td>
-<td><code>raceId</code></td>
 <td>Get all constructor standings for a specific Race based on a <code>raceId</code></td>
 </tr>
 </tbody>
@@ -897,7 +901,6 @@
 <tr>
 <th>Request Type</th>
 <th>Api Endpoint</th>
-<th>constructorId</th>
 <th>Description</th>
 </tr>
 </thead>
@@ -905,7 +908,6 @@
 <tr>
 <td>GET</td>
 <td>/api/constructor-standings/constructor/{constructorId}</td>
-<td><code>constructorId</code></td>
 <td>Get all constructor standings for a specific Constructor based on a <code>constructorId</code></td>
 </tr>
 </tbody>
@@ -935,7 +937,7 @@
             },
         ....
 </code></pre>
-<h3 class="code-line" data-line-start=662 data-line-end=663 ><a id="45_apiconstructorstandingsmostwins_662"></a>4.5 /api/constructor-standings/most-wins</h3>
+<h3 class="code-line" data-line-start=662 data-line-end=663 ><a id="45_apiconstructorstandingsmostwins_662"></a>4.6 /api/constructor-standings/most-wins</h3>
 <table class="table table-striped table-bordered">
 <thead>
 <tr>
@@ -1010,6 +1012,300 @@
         }
     }
 }
+</code></pre>
+<h2 class="code-line" data-line-start=737 data-line-end=738 ><a id="5_Driver_737"></a>5 Driver</h2>
+<table class="table table-striped table-bordered">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>driverId</code></td>
+<td><code>Long</code></td>
+<td>The unique value to identify the Driver object.</td>
+</tr>
+<tr>
+<td><code>driverRef</code></td>
+<td><code>String</code></td>
+<td>Unique ref for the Driver</td>
+</tr>
+<tr>
+<td><code>number</code></td>
+<td><code>int</code></td>
+<td>Driver’s number</td>
+</tr>
+<tr>
+<td><code>code</code></td>
+<td><code>String</code></td>
+<td>Driver’s code</td>
+</tr>
+<tr>
+<td><code>forename</code></td>
+<td><code>String</code></td>
+<td>Driver’s forename</td>
+</tr>
+<tr>
+<td><code>surname</code></td>
+<td><code>String</code></td>
+<td>Driver’s surname</td>
+</tr>
+<tr>
+<td><code>dob</code></td>
+<td><code>Date</code></td>
+<td>Driver’s date of birth</td>
+</tr>
+<tr>
+<td><code>nationality</code></td>
+<td><code>String</code></td>
+<td>Driver’s nationality</td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td><code>String</code></td>
+<td>Driver’s wikipedia URL</td>
+</tr>
+</tbody>
+</table>
+<h3 class="code-line" data-line-start=751 data-line-end=752 ><a id="51_apidrivers_751"></a>5.1 /api/drivers</h3>
+<table class="table table-striped table-bordered">
+<thead>
+<tr>
+<th>Request Type</th>
+<th>Api Endpoint</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td>/api/drivers</td>
+<td>Get all drivers</td>
+</tr>
+</tbody>
+</table>
+<h4 class="code-line" data-line-start=757 data-line-end=758 ><a id="Request_757"></a>Request</h4>
+<p class="has-line-data" data-line-start="758" data-line-end="759"><code>curl --location --request GET 'https://formula1data-api.herokuapp.com/api/drivers'</code></p>
+<h4 class="code-line" data-line-start=760 data-line-end=761 ><a id="Response_760"></a>Response</h4>
+<pre><code class="has-line-data" data-line-start="762" data-line-end="791">{
+    &quot;_embedded&quot;: {
+        &quot;driverList&quot;: [
+            {
+                &quot;driverId&quot;: 1,
+                &quot;driverRef&quot;: &quot;hamilton&quot;,
+                &quot;number&quot;: 44,
+                &quot;code&quot;: &quot;HAM&quot;,
+                &quot;forename&quot;: &quot;Lewis&quot;,
+                &quot;surname&quot;: &quot;Hamilton&quot;,
+                &quot;dob&quot;: &quot;1985-01-07&quot;,
+                &quot;nationality&quot;: &quot;British&quot;,
+                &quot;url&quot;: &quot;http://en.wikipedia.org/wiki/Lewis_Hamilton&quot;,
+                &quot;_links&quot;: {
+                    &quot;self&quot;: [
+                        {
+                            &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/drivers/1&quot;
+                        },
+                        {
+                            &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/drivers/?ref=hamilton&quot;
+                        }
+                    ],
+                    &quot;drivers&quot;: {
+                        &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/drivers&quot;
+                    }
+                }
+            },
+    ...
+</code></pre>
+<h3 class="code-line" data-line-start=792 data-line-end=793 ><a id="52_apidriversid_792"></a>5.2 /api/drivers/{id}</h3>
+<table class="table table-striped table-bordered">
+<thead>
+<tr>
+<th>Request Type</th>
+<th>Api Endpoint</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td>/api/drivers/{id}</td>
+<td>Get a Driver based on the <code>id</code></td>
+</tr>
+</tbody>
+</table>
+<h4 class="code-line" data-line-start=798 data-line-end=799 ><a id="Request_798"></a>Request</h4>
+<p class="has-line-data" data-line-start="799" data-line-end="800"><code>curl --location --request GET 'https://formula1data-api.herokuapp.com/api/drivers/1'</code></p>
+<h4 class="code-line" data-line-start=801 data-line-end=802 ><a id="Response_801"></a>Response</h4>
+<pre><code class="has-line-data" data-line-start="803" data-line-end="828">{
+    &quot;driverId&quot;: 1,
+    &quot;driverRef&quot;: &quot;hamilton&quot;,
+    &quot;number&quot;: 44,
+    &quot;code&quot;: &quot;HAM&quot;,
+    &quot;forename&quot;: &quot;Lewis&quot;,
+    &quot;surname&quot;: &quot;Hamilton&quot;,
+    &quot;dob&quot;: &quot;1985-01-07&quot;,
+    &quot;nationality&quot;: &quot;British&quot;,
+    &quot;url&quot;: &quot;http://en.wikipedia.org/wiki/Lewis_Hamilton&quot;,
+    &quot;_links&quot;: {
+        &quot;self&quot;: [
+            {
+                &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/drivers/1&quot;
+            },
+            {
+                &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/drivers/?ref=hamilton&quot;
+            }
+        ],
+        &quot;drivers&quot;: {
+            &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/drivers&quot;
+        }
+    }
+}
+</code></pre>
+<h3 class="code-line" data-line-start=829 data-line-end=830 ><a id="53_apidriversrefdriverRef_829"></a>5.3 /api/drivers/?ref={driverRef}</h3>
+<table class="table table-striped table-bordered">
+<thead>
+<tr>
+<th>Request Type</th>
+<th>Api Endpoint</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td>/api/drivers/?ref={driverRef}</td>
+<td>Get a Driver based on the <code>driverRef</code></td>
+</tr>
+</tbody>
+</table>
+<h4 class="code-line" data-line-start=835 data-line-end=836 ><a id="Request_835"></a>Request</h4>
+<p class="has-line-data" data-line-start="836" data-line-end="837"><code>curl --location --request GET 'https://formula1data-api.herokuapp.com/api/drivers/?ref=hamilton'</code></p>
+<h4 class="code-line" data-line-start=838 data-line-end=839 ><a id="Response_838"></a>Response</h4>
+<pre><code class="has-line-data" data-line-start="840" data-line-end="865">{
+    &quot;driverId&quot;: 1,
+    &quot;driverRef&quot;: &quot;hamilton&quot;,
+    &quot;number&quot;: 44,
+    &quot;code&quot;: &quot;HAM&quot;,
+    &quot;forename&quot;: &quot;Lewis&quot;,
+    &quot;surname&quot;: &quot;Hamilton&quot;,
+    &quot;dob&quot;: &quot;1985-01-07&quot;,
+    &quot;nationality&quot;: &quot;British&quot;,
+    &quot;url&quot;: &quot;http://en.wikipedia.org/wiki/Lewis_Hamilton&quot;,
+    &quot;_links&quot;: {
+        &quot;self&quot;: [
+            {
+                &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/drivers/1&quot;
+            },
+            {
+                &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/drivers/?ref=hamilton&quot;
+            }
+        ],
+        &quot;drivers&quot;: {
+            &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/drivers&quot;
+        }
+    }
+}
+</code></pre>
+<h3 class="code-line" data-line-start=866 data-line-end=867 ><a id="54_apidriversbydobsortdobOrder_866"></a>5.4 /api/drivers/bydob/?sort={dobOrder}</h3>
+<table class="table table-striped table-bordered">
+<thead>
+<tr>
+<th>Request Type</th>
+<th>Api Endpoint</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td>/api/drivers/bydob/?sort={dobOrder}</td>
+<td>Get all drivers ordered by date of birth. <code>dobOrder</code> = <code>YTO</code> (Young to old, lists drivers from the last born [youngst] to first born [oldest]).<code>dobOrder</code> = <code>OTY</code> (Old to young, lists drivers from the first [oldest] born to the last born [youngest]).</td>
+</tr>
+</tbody>
+</table>
+<h4 class="code-line" data-line-start=872 data-line-end=873 ><a id="Request_872"></a>Request</h4>
+<p class="has-line-data" data-line-start="873" data-line-end="874"><code>curl --location --request GET 'https://formula1data-api.herokuapp.com/api/drivers/bydob/?sort=YTO'</code></p>
+<h4 class="code-line" data-line-start=875 data-line-end=876 ><a id="Response_875"></a>Response</h4>
+<pre><code class="has-line-data" data-line-start="877" data-line-end="906">{
+    &quot;_embedded&quot;: {
+        &quot;driverList&quot;: [
+            {
+                &quot;driverId&quot;: 850,
+                &quot;driverRef&quot;: &quot;tsunoda&quot;,
+                &quot;number&quot;: 22,
+                &quot;code&quot;: &quot;TSU&quot;,
+                &quot;forename&quot;: &quot;Yuki&quot;,
+                &quot;surname&quot;: &quot;Tsunoda&quot;,
+                &quot;dob&quot;: &quot;2000-05-11&quot;,
+                &quot;nationality&quot;: &quot;Japanese&quot;,
+                &quot;url&quot;: &quot;http://en.wikipedia.org/wiki/Yuki_Tsunoda&quot;,
+                &quot;_links&quot;: {
+                    &quot;self&quot;: [
+                        {
+                            &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/drivers/850&quot;
+                        },
+                        {
+                            &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/drivers/?ref=tsunoda&quot;
+                        }
+                    ],
+                    &quot;drivers&quot;: {
+                        &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/drivers&quot;
+                    }
+                }
+            },
+        ....
+</code></pre>
+<h3 class="code-line" data-line-start=907 data-line-end=908 ><a id="55_apidriversnationalitynationality_907"></a>5.5 /api/drivers/nationality/{nationality}</h3>
+<table class="table table-striped table-bordered">
+<thead>
+<tr>
+<th>Request Type</th>
+<th>Api Endpoint</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td>/api/drivers/nationality/{nationality}</td>
+<td>Get all drivers that have their nationality equal to <code>nationality</code></td>
+</tr>
+</tbody>
+</table>
+<h4 class="code-line" data-line-start=913 data-line-end=914 ><a id="Request_913"></a>Request</h4>
+<p class="has-line-data" data-line-start="914" data-line-end="915"><code>curl --location --request GET 'https://formula1data-api.herokuapp.com/api/drivers/nationality/German'</code></p>
+<h4 class="code-line" data-line-start=916 data-line-end=917 ><a id="Response_916"></a>Response</h4>
+<pre><code class="has-line-data" data-line-start="918" data-line-end="947">{
+    &quot;_embedded&quot;: {
+        &quot;driverList&quot;: [
+            {
+                &quot;driverId&quot;: 2,
+                &quot;driverRef&quot;: &quot;heidfeld&quot;,
+                &quot;number&quot;: 0,
+                &quot;code&quot;: &quot;HEI&quot;,
+                &quot;forename&quot;: &quot;Nick&quot;,
+                &quot;surname&quot;: &quot;Heidfeld&quot;,
+                &quot;dob&quot;: &quot;1977-05-10&quot;,
+                &quot;nationality&quot;: &quot;German&quot;,
+                &quot;url&quot;: &quot;http://en.wikipedia.org/wiki/Nick_Heidfeld&quot;,
+                &quot;_links&quot;: {
+                    &quot;self&quot;: [
+                        {
+                            &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/drivers/2&quot;
+                        },
+                        {
+                            &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/drivers/?ref=heidfeld&quot;
+                        }
+                    ],
+                    &quot;drivers&quot;: {
+                        &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/drivers&quot;
+                    }
+                }
+            },
+        ...
 </code></pre>
 </body>
 </html>
