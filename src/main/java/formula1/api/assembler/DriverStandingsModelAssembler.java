@@ -17,7 +17,7 @@ public class DriverStandingsModelAssembler implements RepresentationModelAssembl
         return EntityModel.of(
                 driverStandings,
                 linkTo(methodOn(DriverStandingsController.class).getDriverStandingsById(driverStandings.getDriverStandingsId())).withSelfRel(),
-                linkTo(methodOn(DriverStandingsController.class).getAllDriverStandings()).withRel("driverstandings")
+                linkTo(methodOn(DriverStandingsController.class).getAllDriverStandings()).withRel("driver-standings")
         );
     }
 }

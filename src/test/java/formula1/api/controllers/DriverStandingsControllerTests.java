@@ -50,7 +50,7 @@ public class DriverStandingsControllerTests {
         given(driverStandingsRepository.findAll())
                 .willReturn(Collections.singletonList(driverStandings));
 
-        assertListRequestIsValid("/api/driverstandings");
+        assertListRequestIsValid("/api/driver-standings");
     }
 
     @Test
@@ -58,7 +58,7 @@ public class DriverStandingsControllerTests {
         given(driverStandingsRepository.findById(33007L))
                 .willReturn(java.util.Optional.of(driverStandings));
 
-        assertRequestIsValid("/api/driverstandings/33007");
+        assertRequestIsValid("/api/driver-standings/33007");
     }
 
     @Test
@@ -66,7 +66,7 @@ public class DriverStandingsControllerTests {
         given(driverStandingsRepository.findById(33007L))
                 .willReturn(java.util.Optional.of(driverStandings));
 
-        assertRequestThrowsExeption("/api/driverstandings/12345", "Driver standings not found for driverStandingsId 12345");
+        assertRequestThrowsExeption("/api/driver-standings/12345", "Driver standings not found for driverStandingsId 12345");
     }
 
 
@@ -75,7 +75,7 @@ public class DriverStandingsControllerTests {
         given(driverStandingsRepository.findDriverStandingsByRace(1030L))
                 .willReturn(Collections.singletonList(driverStandings));
 
-        assertListRequestIsValid("/api/driverstandings/race/1030");
+        assertListRequestIsValid("/api/driver-standings/race/1030");
     }
 
     @Test
@@ -83,7 +83,7 @@ public class DriverStandingsControllerTests {
         given(driverStandingsRepository.findDriverStandingsByRace(1030L))
                 .willReturn(Collections.singletonList(driverStandings));
 
-        assertRequestThrowsExeption("/api/driverstandings/race/12345", "Driver standings not found for raceId 12345");
+        assertRequestThrowsExeption("/api/driver-standings/race/12345", "Driver standings not found for raceId 12345");
     }
 
     @Test
@@ -91,7 +91,7 @@ public class DriverStandingsControllerTests {
         given(driverStandingsRepository.findDriverStandingsByDriver(1L))
                 .willReturn(Collections.singletonList(driverStandings));
 
-        assertListRequestIsValid("/api/driverstandings/driver/1");
+        assertListRequestIsValid("/api/driver-standings/driver/1");
     }
 
     @Test
@@ -99,7 +99,7 @@ public class DriverStandingsControllerTests {
         given(driverStandingsRepository.findDriverStandingsByDriver(1L))
                 .willReturn(Collections.singletonList(driverStandings));
 
-        assertRequestThrowsExeption("/api/driverstandings/driver/12345", "Driver standings not found for driverId 12345");
+        assertRequestThrowsExeption("/api/driver-standings/driver/12345", "Driver standings not found for driverId 12345");
     }
 
     private void assertRequestIsValid(String path) throws Exception {
@@ -114,8 +114,8 @@ public class DriverStandingsControllerTests {
                 .andExpect(jsonPath("position", is(1)))
                 .andExpect(jsonPath("positionText", is("1")))
                 .andExpect(jsonPath("wins", is(11)))
-                .andExpect(jsonPath("_links.self.href", is("http://localhost/api/driverstandings/33007")))
-                .andExpect(jsonPath("_links.driverstandings.href", is("http://localhost/api/driverstandings")))
+                .andExpect(jsonPath("_links.self.href", is("http://localhost/api/driver-standings/33007")))
+                .andExpect(jsonPath("_links.driver-standings.href", is("http://localhost/api/driver-standings")))
                 .andReturn();
     }
 
@@ -131,8 +131,8 @@ public class DriverStandingsControllerTests {
                 .andExpect(jsonPath("$._embedded.driverStandingsList[0].position", is(1)))
                 .andExpect(jsonPath("$._embedded.driverStandingsList[0].positionText", is("1")))
                 .andExpect(jsonPath("$._embedded.driverStandingsList[0].wins", is(11)))
-                .andExpect(jsonPath("$._embedded.driverStandingsList[0]._links.self.href", is("http://localhost/api/driverstandings/33007")))
-                .andExpect(jsonPath("$._embedded.driverStandingsList[0]._links.driverstandings.href", is("http://localhost/api/driverstandings")))
+                .andExpect(jsonPath("$._embedded.driverStandingsList[0]._links.self.href", is("http://localhost/api/driver-standings/33007")))
+                .andExpect(jsonPath("$._embedded.driverStandingsList[0]._links.driver-standings.href", is("http://localhost/api/driver-standings")))
                 .andReturn();
     }
 

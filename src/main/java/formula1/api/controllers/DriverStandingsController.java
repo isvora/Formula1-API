@@ -27,7 +27,7 @@ public class DriverStandingsController {
         this.driverStandingsModelAssembler = driverStandingsModelAssembler;
     }
 
-    @GetMapping("/api/driverstandings")
+    @GetMapping("/api/driver-standings")
     public CollectionModel<EntityModel<DriverStandings>> getAllDriverStandings() {
         List<EntityModel<DriverStandings>> driverStandingsEntityModels = driverStandingsRepository.findAll()
                 .stream()
@@ -40,14 +40,14 @@ public class DriverStandingsController {
         );
     }
 
-    @GetMapping("/api/driverstandings/{driverStandingsId}")
+    @GetMapping("/api/driver-standings/{driverStandingsId}")
     public EntityModel<DriverStandings> getDriverStandingsById(@PathVariable Long driverStandingsId) {
         DriverStandings driverStandings = driverStandingsRepository.findById(driverStandingsId)
                 .orElseThrow(() -> new DriverStandingsNotFoundException("Driver standings not found for driverStandingsId " + driverStandingsId));
         return driverStandingsModelAssembler.toModel(driverStandings);
     }
 
-    @GetMapping("/api/driverstandings/race/{raceId}")
+    @GetMapping("/api/driver-standings/race/{raceId}")
     public CollectionModel<EntityModel<DriverStandings>> getAllDriverStandingsByRace(@PathVariable Long raceId) {
         List<DriverStandings> driverStandingsList = driverStandingsRepository.findDriverStandingsByRace(raceId);
         List<EntityModel<DriverStandings>> driverStandingsEntityModels = driverStandingsList.stream()
@@ -64,7 +64,7 @@ public class DriverStandingsController {
         );
     }
 
-    @GetMapping("/api/driverstandings/driver/{driverId}")
+    @GetMapping("/api/driver-standings/driver/{driverId}")
     public CollectionModel<EntityModel<DriverStandings>> getAllDriverStandingsByDriverId(@PathVariable Long driverId) {
         List<DriverStandings> driverStandingsList = driverStandingsRepository.findDriverStandingsByDriver(driverId);
         List<EntityModel<DriverStandings>> driverStandingsEntityModels = driverStandingsList.stream()
@@ -74,32 +74,6 @@ public class DriverStandingsController {
         if (driverStandingsEntityModels.isEmpty()) {
             throw new DriverStandingsNotFoundException("Driver standings not found for driverId " + driverId);
         }
-
-        return CollectionModel.of(
-                driverStandingsEntityModels,
-                linkTo(methodOn(DriverStandingsController.class)).withSelfRel()
-        );
-    }
-
-    @GetMapping("/api/driverstandings/bywins")
-    public CollectionModel<EntityModel<DriverStandings>> getAllDriverStandingsByWins() {
-        List<DriverStandings> driverStandingsList = driverStandingsRepository.findDriverStandingsByWins();
-        List<EntityModel<DriverStandings>> driverStandingsEntityModels = driverStandingsList.stream()
-                .map(driverStandingsModelAssembler::toModel)
-                .collect(Collectors.toList());
-
-        return CollectionModel.of(
-                driverStandingsEntityModels,
-                linkTo(methodOn(DriverStandingsController.class)).withSelfRel()
-        );
-    }
-
-    @GetMapping("/api/driverstandings/bypoints")
-    public CollectionModel<EntityModel<DriverStandings>> getAllDriverStandingsByPoints() {
-        List<DriverStandings> driverStandingsList = driverStandingsRepository.findDriverStandingsByPoints();
-        List<EntityModel<DriverStandings>> driverStandingsEntityModels = driverStandingsList.stream()
-                .map(driverStandingsModelAssembler::toModel)
-                .collect(Collectors.toList());
 
         return CollectionModel.of(
                 driverStandingsEntityModels,
