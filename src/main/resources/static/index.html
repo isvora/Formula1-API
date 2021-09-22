@@ -39,6 +39,11 @@
 <h5 class="code-line" data-line-start=35 data-line-end=36 ><a id="53_apidriversrefref_35" href="#53_apidriversrefdriverRef_829">&emsp;5.3 /api/drivers/?ref={ref}</a></h5>
 <h5 class="code-line" data-line-start=36 data-line-end=37 ><a id="54_apidriversbydobsortdobOrder_36" href="#54_apidriversbydobsortdobOrder_866">&emsp;5.4 /api/drivers/bydob/?sort={dobOrder}</a></h5>
 <h5 class="code-line" data-line-start=37 data-line-end=38 ><a id="55_apidriversnationalitynationality_37" href="#55_apidriversnationalitynationality_907">&emsp;5.5 /api/drivers/nationality/{nationality</a></h5>
+<h3 class="code-line" data-line-start=38 data-line-end=39 ><a id="6_DriverStandings_38" href="#6_DriverStandings_953">6 DriverStandings</a></6></h3>
+<h5 class="code-line" data-line-start=39 data-line-end=40 ><a id="61_apidriverstandings_39" href="#61_apidriverstandings_973">&emsp;6.1 /api/driver-standings</a></h5>
+<h5 class="code-line" data-line-start=40 data-line-end=41 ><a id="62_apidriverstandingsid_40" href="#62_apidriverstandingsid_1007">&emsp;6.2 /api/driver-standings/{id}</a></h5>
+<h5 class="code-line" data-line-start=41 data-line-end=42 ><a id="63_apidriverstandingsraceraceId_41" href="#5_63_apidriverstandingsraceraceId_1037Driver_737">&emsp;6.3 /api/driver-standings/race/{raceId}</a></h5>
+<h5 class="code-line" data-line-start=42 data-line-end=43 ><a id="64_apidriverstandingsdriverdriverId_42" href="#64_apidriverstandingsdriverdriverId_1071">&emsp;6.4 /api/driver-standings/driver/{driverId}</a></h5>   
 <br/>
 <h1 class="code-line" data-line-start=15 data-line-end=16 ><a id="Docs_15"></a>Docs</h1>
 <p class="has-line-data" data-line-start="17" data-line-end="18">Here you can find all the requests with examples</p>
@@ -1306,6 +1311,219 @@
                 }
             },
         ...
+</code></pre>
+<h2 class="code-line" data-line-start=953 data-line-end=954 ><a id="6_DriverStandings_953"></a>6 DriverStandings</h2>
+<pre><code>private @Id @GeneratedValue Long driverStandingsId;
+</code></pre>
+<table class="table table-striped table-bordered">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>driverStandingsId</code></td>
+<td><code>Long</code></td>
+<td>The unique value to identify the DriverStandings object.</td>
+</tr>
+<tr>
+<td><code>raceId</code></td>
+<td><code>Long</code></td>
+<td>Unique race id</td>
+</tr>
+<tr>
+<td><code>driverId</code></td>
+<td><code>Long</code></td>
+<td>Unique driverId</td>
+</tr>
+<tr>
+<td><code>points</code></td>
+<td><code>double</code></td>
+<td>Points scored</td>
+</tr>
+<tr>
+<td><code>position</code></td>
+<td><code>int</code></td>
+<td>Position finished</td>
+</tr>
+<tr>
+<td><code>positionText</code></td>
+<td><code>String</code></td>
+<td>Position finished as string</td>
+</tr>
+<tr>
+<td><code>wins</code></td>
+<td><code>int</code></td>
+<td>Number of wins</td>
+</tr>
+</tbody>
+</table>
+<h3 class="code-line" data-line-start=973 data-line-end=974 ><a id="61_apidriverstandings_973"></a>6.1 /api/driver-standings</h3>
+<table class="table table-striped table-bordered">
+<thead>
+<tr>
+<th>Request Type</th>
+<th>Api Endpoint</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td>/api/driver-standings</td>
+<td>Get all driver standings</td>
+</tr>
+</tbody>
+</table>
+<h4 class="code-line" data-line-start=979 data-line-end=980 ><a id="Request_979"></a>Request</h4>
+<p class="has-line-data" data-line-start="980" data-line-end="981"><code>curl --location --request GET 'https://formula1data-api.herokuapp.com/api/driver-standings'</code></p>
+<h4 class="code-line" data-line-start=982 data-line-end=983 ><a id="Response_982"></a>Response</h4>
+<pre><code class="has-line-data" data-line-start="984" data-line-end="1006">{
+    &quot;_embedded&quot;: {
+        &quot;driverStandingsList&quot;: [
+            {
+                &quot;driverStandingsId&quot;: 1141,
+                &quot;raceId&quot;: 18,
+                &quot;driverId&quot;: 1,
+                &quot;points&quot;: 10.0,
+                &quot;position&quot;: 1,
+                &quot;positionText&quot;: &quot;1&quot;,
+                &quot;wins&quot;: 1,
+                &quot;_links&quot;: {
+                    &quot;self&quot;: {
+                        &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/driver-standings/1141&quot;
+                    },
+                    &quot;driver-standings&quot;: {
+                        &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/driver-standings&quot;
+                    }
+                }
+            },
+    ...
+</code></pre>
+<h3 class="code-line" data-line-start=1007 data-line-end=1008 ><a id="62_apidriverstandingsid_1007"></a>6.2 /api/driver-standings/{id}</h3>
+<table class="table table-striped table-bordered">
+<thead>
+<tr>
+<th>Request Type</th>
+<th>Api Endpoint</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td>/api/driver-standings/{id}</td>
+<td>Get a Driver Standings based on the <code>id</code></td>
+</tr>
+</tbody>
+</table>
+<h4 class="code-line" data-line-start=1013 data-line-end=1014 ><a id="Request_1013"></a>Request</h4>
+<p class="has-line-data" data-line-start="1014" data-line-end="1015"><code>curl --location --request GET 'https://formula1data-api.herokuapp.com/api/driver-standings/1141'</code></p>
+<h4 class="code-line" data-line-start=1016 data-line-end=1017 ><a id="Response_1016"></a>Response</h4>
+<pre><code class="has-line-data" data-line-start="1018" data-line-end="1036">{
+    &quot;driverStandingsId&quot;: 1141,
+    &quot;raceId&quot;: 18,
+    &quot;driverId&quot;: 1,
+    &quot;points&quot;: 10.0,
+    &quot;position&quot;: 1,
+    &quot;positionText&quot;: &quot;1&quot;,
+    &quot;wins&quot;: 1,
+    &quot;_links&quot;: {
+        &quot;self&quot;: {
+            &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/driver-standings/1141&quot;
+        },
+        &quot;driver-standings&quot;: {
+            &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/driver-standings&quot;
+        }
+    }
+}
+</code></pre>
+<h3 class="code-line" data-line-start=1037 data-line-end=1038 ><a id="63_apidriverstandingsraceraceId_1037"></a>6.3 /api/driver-standings/race/{raceId}</h3>
+<table class="table table-striped table-bordered">
+<thead>
+<tr>
+<th>Request Type</th>
+<th>Api Endpoint</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td>/api/driver-standings/race/{raceId}</td>
+<td>Get a Driver Standings for a race based on the <code>raceId</code></td>
+</tr>
+</tbody>
+</table>
+<h4 class="code-line" data-line-start=1043 data-line-end=1044 ><a id="Request_1043"></a>Request</h4>
+<p class="has-line-data" data-line-start="1044" data-line-end="1045"><code>curl --location --request GET 'https://formula1data-api.herokuapp.com/api/driver-standings/race/18'</code></p>
+<h4 class="code-line" data-line-start=1046 data-line-end=1047 ><a id="Response_1046"></a>Response</h4>
+<pre><code class="has-line-data" data-line-start="1048" data-line-end="1070">{
+    &quot;_embedded&quot;: {
+        &quot;driverStandingsList&quot;: [
+            {
+                &quot;driverStandingsId&quot;: 1141,
+                &quot;raceId&quot;: 18,
+                &quot;driverId&quot;: 1,
+                &quot;points&quot;: 10.0,
+                &quot;position&quot;: 1,
+                &quot;positionText&quot;: &quot;1&quot;,
+                &quot;wins&quot;: 1,
+                &quot;_links&quot;: {
+                    &quot;self&quot;: {
+                        &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/driver-standings/1141&quot;
+                    },
+                    &quot;driver-standings&quot;: {
+                        &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/driver-standings&quot;
+                    }
+                }
+            },
+        ...
+</code></pre>
+<h3 class="code-line" data-line-start=1071 data-line-end=1072 ><a id="64_apidriverstandingsdriverdriverId_1071"></a>6.4 /api/driver-standings/driver/driverId</h3>
+<table class="table table-striped table-bordered">
+<thead>
+<tr>
+<th>Request Type</th>
+<th>Api Endpoint</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td>/api/driver-standings/driver/{driverId}</td>
+<td>Get a Driver Standings for a driver based on the <code>driverId</code></td>
+</tr>
+</tbody>
+</table>
+<h4 class="code-line" data-line-start=1077 data-line-end=1078 ><a id="Request_1077"></a>Request</h4>
+<p class="has-line-data" data-line-start="1078" data-line-end="1079"><code>curl --location --request GET 'https://formula1data-api.herokuapp.com/api/driver-standings/driver/1'</code></p>
+<h4 class="code-line" data-line-start=1080 data-line-end=1081 ><a id="Response_1080"></a>Response</h4>
+<pre><code class="has-line-data" data-line-start="1082" data-line-end="1104">{
+    &quot;_embedded&quot;: {
+        &quot;driverStandingsList&quot;: [
+            {
+                &quot;driverStandingsId&quot;: 1141,
+                &quot;raceId&quot;: 18,
+                &quot;driverId&quot;: 1,
+                &quot;points&quot;: 10.0,
+                &quot;position&quot;: 1,
+                &quot;positionText&quot;: &quot;1&quot;,
+                &quot;wins&quot;: 1,
+                &quot;_links&quot;: {
+                    &quot;self&quot;: {
+                        &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/driver-standings/1141&quot;
+                    },
+                    &quot;driver-standings&quot;: {
+                        &quot;href&quot;: &quot;https://formula1data-api.herokuapp.com/api/driver-standings&quot;
+                    }
+                }
+            },
+        ....
 </code></pre>
 </body>
 </html>
