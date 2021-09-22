@@ -29,10 +29,12 @@ public class LoadDatabase {
                                    ConstructorResultsRepository constructorResultsRepository,
                                    ConstructorStandingsRepository constructorStandingsRepository,
                                    DriverRepository driverRepository,
-                                   DriverStandingsRepository driverStandingsRepository) {
+                                   DriverStandingsRepository driverStandingsRepository,
+                                   LapTimeRepository lapTimeRepository) {
         return args -> {
             log.info("Loading database...");
             loadDriverData(driverRepository);
+            loadLapTimeData(lapTimeRepository);
             loadCircuitData(circuitRepository);
             loadConstructorData(constructorRepository);
             loadDriverStandingsData(driverStandingsRepository);
@@ -105,6 +107,17 @@ public class LoadDatabase {
 
         if (driverStandingsList != null) {
             driverStandingsRepository.saveAll(driverStandingsList);
+        }
+    }
+
+    private void loadLapTimeData(LapTimeRepository lapTimeRepository) {
+        String json = parseFile("./resources/json/lap_times.json");
+        Type lapTime = new TypeToken<ArrayList<LapTime>>(){}.getType();
+
+        ArrayList<LapTime> lapTimeArrayList = gson.fromJson(json, lapTime);
+
+        if (lapTimeArrayList != null) {
+            lapTimeRepository.saveAll(lapTimeArrayList);
         }
     }
 
