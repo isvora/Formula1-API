@@ -1,13 +1,13 @@
 package formula1.api.repositories;
 
 import formula1.api.entities.LapTime;
-import formula1.api.exceptions.LapTimeNotFoundException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
@@ -35,5 +35,10 @@ public interface LapTimeRepository extends JpaRepository<LapTime, Long> {
         return this.findAll().stream()
                 .filter(lapTime -> Objects.equals(lapTime.getRaceId(), raceId) && Objects.equals(lapTime.getDriverId(), driverId) && Objects.equals(lapTime.getLap(), lap))
                 .collect(Collectors.toList());
+    }
+
+    default Optional<LapTime> findFastestLapTimeByADriverInARace(Long driverId, Long raceId) {
+        return this.findAll().stream()
+                .filter(lapTime -> Objects.equals(lapTime.getRaceId(), raceId) && Objects.equals(lapTime.getDriverId(), driverId)).min(Comparator.comparing(LapTime::getMiliseconds));
     }
 }
