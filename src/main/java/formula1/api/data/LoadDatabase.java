@@ -34,7 +34,7 @@ public class LoadDatabase {
         return args -> {
             log.info("Loading database...");
             loadDriverData(driverRepository);
-            loadLapTimeData(lapTimeRepository);
+            //loadLapTimeData(lapTimeRepository); Too much data, crashes the app. TODO: Database implementation
             loadCircuitData(circuitRepository);
             loadConstructorData(constructorRepository);
             loadDriverStandingsData(driverStandingsRepository);

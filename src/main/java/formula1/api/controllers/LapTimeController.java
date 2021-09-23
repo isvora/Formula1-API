@@ -50,7 +50,7 @@ public class LapTimeController {
         return lapTimeModelAssembler.toModel(lapTime);
     }
 
-    @GetMapping("/api/lap-times/driverId/{driverId}")
+    @GetMapping("/api/lap-times/driver/{driverId}")
     public CollectionModel<EntityModel<LapTime>>  getLapTimesByDriver(@PathVariable Long driverId) {
         List<EntityModel<LapTime>> lapTimeEntityModels = lapTimeRepository.findAllLapTimesByDriver(driverId).stream()
                 .map(lapTimeModelAssembler::toModel)
@@ -105,12 +105,20 @@ public class LapTimeController {
                 .collect(Collectors.toList());
 
         if (lapTimeEntityModels.isEmpty()) {
-            throw new LapTimeNotFoundException("Lap times not found for driverId " + driverId + " and raceId " + raceId + " and lap " + lap);
+            throw new LapTimeNotFoundException("Lap time not found for driverId " + driverId + " and raceId " + raceId + " and lap " + lap);
         }
 
         return CollectionModel.of(
                 lapTimeEntityModels,
                 linkTo(methodOn(LapTimeController.class)).withSelfRel()
         );
+    }
+
+    @GetMapping("/api/lap-times/driver-race/fastest-lap/")
+    public EntityModel<LapTime> getLapTimesById(@RequestParam(value="driverId") Long driverId, @RequestParam(value="raceId") Long raceId) {
+        LapTime lapTime = lapTimeRepository.findFastestLapTimeByADriverInARace(driverId, raceId)
+                .orElseThrow(() -> new LapTimeNotFoundException("Fastest lap time not found for driverId " + driverId + " and raceId " + raceId));
+
+        return lapTimeModelAssembler.toModel(lapTime);
     }
 }
